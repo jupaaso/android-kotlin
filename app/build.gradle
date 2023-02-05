@@ -74,5 +74,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02"
     // Foundation
     implementation "androidx.compose.foundation:foundation:1.2.0-alpha02"
+    // AsuncImage
+    implementation "io.coil-kt:coil-compose:2.2.2"
 
 }

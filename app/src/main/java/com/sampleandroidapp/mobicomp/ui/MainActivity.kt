@@ -1,5 +1,6 @@
-package com.sampleandroidapp.mobicomp
+package com.sampleandroidapp.mobicomp.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -24,22 +25,23 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     //Greeting("Android")
-                    LoginScreen(modifier = Modifier.fillMaxSize())
+                    //LoginScreen(modifier = Modifier.fillMaxSize())
+                    MobileComputingApp()
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
+//@Composable
+//fun Greeting(name: String) {
+//    Text(text = "Hello $name!")
+//}
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MobicompTheme {
-        Greeting("Android")
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    MobicompTheme {
+//        Greeting("Android")
+//    }
+//}
