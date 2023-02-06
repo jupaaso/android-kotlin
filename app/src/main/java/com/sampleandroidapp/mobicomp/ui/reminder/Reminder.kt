@@ -15,7 +15,7 @@ import com.google.accompanist.insets.systemBarsPadding
 fun Reminder(
     onBackPress: () -> Unit
 ) {
-    Text(text = "Here is home screen, main screen. To be developed later")
+    Text(text = "Here is Reminder screen, main screen. To be developed later")
 
     Surface {
         Column(

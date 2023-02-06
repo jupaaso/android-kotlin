@@ -59,10 +59,12 @@ fun Profile(
         notification.value =""
     }
 
-    var name by rememberSaveable { mutableStateOf("default name") }
+    var name = rememberSaveable { mutableStateOf("default name") }
     var username by rememberSaveable { mutableStateOf("default username") }
     var email by rememberSaveable { mutableStateOf("default email") }
     var bio by rememberSaveable { mutableStateOf("default bio") }
+
+    //val name = rememberSaveable { mutableStateOf("") }
 
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -120,8 +122,8 @@ fun Profile(
             ) {
                 Text(text = "Name", modifier = Modifier.width(100.dp))
                 TextField(
-                    value = name,
-                    onValueChange = { name = it },
+                    value = name.value,
+                    onValueChange = { text -> name.value = text },
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = Color.Transparent,
                         textColor = Color.White

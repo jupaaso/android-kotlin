@@ -1,5 +1,6 @@
 package com.sampleandroidapp.mobicomp.ui.login
 
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -21,6 +22,7 @@ import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.sampleandroidapp.mobicomp.R
@@ -35,18 +37,31 @@ fun LoginScreen(
         // on below line we are creating
         // a variable for shared preferences.
         lateinit var sharedPreferences: SharedPreferences
+        val context = LocalContext.current
 
         // on below line we are creating a variable
-        // for prefs key and email key and pwd key.
-        var PREFS_KEY = "prefs"
+        // for the file MyPefs key and user key and pwd key.
+
+        var PREFS_KEY = "MyPrefs"
         var USERNAME_KEY = "juha"
         var PASSWORD_KEY = "pass"
+
+        // SharedPreferences Initialize
+        sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         val username = rememberSaveable { mutableStateOf("") }  // if needed pre-value: juha
         val password = rememberSaveable { mutableStateOf("") }  // if needed pre-value:
 
         val usernameErrorState = remember { mutableStateOf(false) }
         val passwordErrorState = remember { mutableStateOf(false) }
+
+        // Get the Editor of SharedPreferences
+        val editor = sharedPreferences.edit()
+
+        // To sharedPreferences default values
+        editor.putString("USERNAME_KEY", USERNAME_KEY)
+        editor.putString("PASSWORD_KEY", PASSWORD_KEY)
+        editor.commit()
 
         //val context = LocalContext.current
 
@@ -72,7 +87,13 @@ fun LoginScreen(
             // TextField: text moves up inside the box
             OutlinedTextField(                      // Outlined: text moves up to outline
                 value = username.value,
-                onValueChange = { text -> username.value = text },
+                onValueChange = {
+                        text -> username.value = text
+                        if (username.value.isNotEmpty()) {
+                            editor.putString("USERNAME_KEY", username.value)
+                        // Save the above values in Preferences
+                        editor.apply() }
+                        },
                 modifier = Modifier.fillMaxWidth(),      // needs to do this first
                 label = { Text(text = "Username") },       // and then Center the image
                 shape = RoundedCornerShape(size = 50.dp) // rounded corners
@@ -82,7 +103,13 @@ fun LoginScreen(
 
             OutlinedTextField(
                 value = password.value,
-                onValueChange = { passwordString -> password.value = passwordString },
+                onValueChange = {
+                        passwordString -> password.value = passwordString
+                        if (password.value.isNotEmpty()) {
+                            editor.putString("PASSWORD_KEY", password.value)
+                        // Save the above values in Preferences
+                        editor.apply() }
+                        },
                 modifier = Modifier.fillMaxWidth(),        // Calling the isolla "head" Modifier
                 label = { Text(text = "Password") },
                 visualTransformation = PasswordVisualTransformation(),  // hides text, shows *
@@ -92,7 +119,19 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(30.dp))
 
             Button(                       // androidx.compose.ui.Modifier
-                onClick = { navController.navigate("home") },
+                onClick = {
+                    val userStr = sharedPreferences.getString("USERNAME_KEY", "")
+                    val passStr = sharedPreferences.getString("PASSWORD_KEY", "")
+
+                    System.out.println("val userStr: " + userStr)
+                    System.out.println("val passStr: " + passStr)
+                    System.out.println("val username.value: " + username.value)
+                    System.out.println("val password.value: " + password.value)
+
+                    if (username.value == userStr!! && password.value == passStr!!) {
+                        System.out.println("Silmukassa OLEN")
+                        navController.navigate("home") }
+                    },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),

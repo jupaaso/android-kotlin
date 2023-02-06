@@ -76,5 +76,6 @@ dependencies {
     implementation "androidx.compose.foundation:foundation:1.2.0-alpha02"
     // AsuncImage
     implementation "io.coil-kt:coil-compose:2.2.2"
-
+    // Shared Preferences
+    implementation "androidx.preference:preference-ktx:1.2.0"
 }
