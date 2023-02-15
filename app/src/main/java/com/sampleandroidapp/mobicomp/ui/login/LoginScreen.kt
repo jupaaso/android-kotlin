@@ -52,8 +52,9 @@ fun LoginScreen(
         val username = rememberSaveable { mutableStateOf("") }  // if needed pre-value: juha
         val password = rememberSaveable { mutableStateOf("") }  // if needed pre-value:
 
-        val usernameErrorState = remember { mutableStateOf(false) }
-        val passwordErrorState = remember { mutableStateOf(false) }
+        // Not needed
+        //val usernameErrorState = remember { mutableStateOf(false) }
+        //val passwordErrorState = remember { mutableStateOf(false) }
 
         // Get the Editor of SharedPreferences
         val editor = sharedPreferences.edit()
@@ -129,7 +130,7 @@ fun LoginScreen(
                     System.out.println("val password.value: " + password.value)
 
                     if (username.value == userStr!! && password.value == passStr!!) {
-                        System.out.println("Silmukassa OLEN")
+                        System.out.println("Silmukassa homeen menossa OLEN")
                         navController.navigate("home") }
                     },
                 modifier = Modifier

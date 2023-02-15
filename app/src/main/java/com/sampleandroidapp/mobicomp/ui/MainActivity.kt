@@ -1,5 +1,6 @@
 package com.sampleandroidapp.mobicomp.ui
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,6 +12,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.room.Room
+import com.sampleandroidapp.mobicomp.data.CategoryRepository
+import com.sampleandroidapp.mobicomp.data.MobileComputingDatabase
+import com.sampleandroidapp.mobicomp.data.ReminderRepository
 import com.sampleandroidapp.mobicomp.ui.login.LoginScreen
 import com.sampleandroidapp.mobicomp.ui.theme.MobicompTheme
 
@@ -26,6 +31,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //Greeting("Android")
                     //LoginScreen(modifier = Modifier.fillMaxSize())
+
                     MobileComputingApp()
                 }
             }

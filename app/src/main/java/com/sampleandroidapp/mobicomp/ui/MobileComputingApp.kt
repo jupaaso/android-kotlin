@@ -3,10 +3,10 @@ package com.sampleandroidapp.mobicomp.ui
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sampleandroidapp.mobicomp.MobileComputingAppState
-import com.sampleandroidapp.mobicomp.rememberMobileComputingAppState
+import com.sampleandroidapp.mobicomp.ui.MobileComputingAppState
 import com.sampleandroidapp.mobicomp.ui.home.Home
 import com.sampleandroidapp.mobicomp.ui.login.LoginScreen
+import com.sampleandroidapp.mobicomp.ui.maps.ReminderLocationMap
 import com.sampleandroidapp.mobicomp.ui.profile.Profile
 import com.sampleandroidapp.mobicomp.ui.reminder.Reminder
 
@@ -28,7 +28,10 @@ fun MobileComputingApp(
             Profile(navController = appState.navController)
         }
         composable(route = "reminder") {
-            Reminder(onBackPress = appState::navigateBack)
+            Reminder(onBackPress = appState::navigateBack, navController = appState.navController)
+        }
+        composable(route = "map") {
+            ReminderLocationMap(navController = appState.navController)
         }
     }
 }
